@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookstore book list</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}">
 </head>
 <body>
     <h1>Books</h1>
-    <table>
+    <table class="table table-striped">
         <tr>
             <th>Title</th>
             <th>Author</th>
@@ -19,12 +20,12 @@
             <td th:text="${book.author}"></td>
             <td th:text="${book.publicationYear}"></td>
             <td th:text="${book.isbn}"></td>
-            <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+            <td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger" >Delete</a></td>
             <td><a th:href="@{/editBook/{id}(id=${book.id})}">Edit</a></td>
         </tr>
     </table>
 
-    <p><a href="/addBook">Add book</a></p>
+    <p><a href="/addBook" class="btn btn-success" >Add book</a></p>
     
 </body>
 </html>
