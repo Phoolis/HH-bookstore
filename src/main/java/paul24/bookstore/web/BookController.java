@@ -13,6 +13,7 @@ import paul24.bookstore.model.BookRepository;
 
 
 
+
 @Controller
 public class BookController {
 
@@ -24,29 +25,43 @@ public class BookController {
         return new String();
     }
 
-    @GetMapping("/booklist")
+    @GetMapping("/bookList")
     public String showBooks(Model model) {
         model.addAttribute("books", bookRepository.findAll());
-        return "booklist";
+        return "bookList";
     }
 
-    @GetMapping("/addbook")
+    @GetMapping("/addBook")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
-        return "addbook";
+        return "addBook";
     }
 
     @PostMapping("/saveBook")
     public String saveBook(Book book) {
         bookRepository.save(book);
-        return "redirect:/booklist";
+        return "redirect:/bookList";
     }
     
     @GetMapping("delete/{id}")
     public String deleteBook(@PathVariable("id") Long id, Model model) {
         bookRepository.deleteById(id);
-        return "redirect:/booklist";
+        return "redirect:/bookList";
     }
+
+    @GetMapping("editBook/{id}")
+    public String editBook(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("editBook", bookRepository.findById(id));
+        return "editBook";
+    }
+
+    @PostMapping("/saveEditedBook")
+    public String saveEditedBook(Book book) {
+        bookRepository.save(book);
+        return "redirect:/bookList";
+    }
+    
+    
     
     
     

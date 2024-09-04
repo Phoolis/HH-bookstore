@@ -11,7 +11,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
-    
+
     private String title;
     private String author;
     private int publicationYear;
@@ -31,6 +31,10 @@ public class Book {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
