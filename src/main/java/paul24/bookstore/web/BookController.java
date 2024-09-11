@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import paul24.bookstore.model.Book;
 import paul24.bookstore.model.BookRepository;
+import paul24.bookstore.model.CategoryRepository;
 
 
 
@@ -19,6 +20,8 @@ public class BookController {
 
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @GetMapping("/index")
     public String getMethodName(@RequestParam String param) {
@@ -34,11 +37,12 @@ public class BookController {
     @GetMapping("/addBook")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "addBook";
     }
 
     @PostMapping("/saveBook")
-    public String saveBook(Book book) {
+    public String saveBook(Book book, Model model) {
         bookRepository.save(book);
         return "redirect:/bookList";
     }
@@ -52,11 +56,12 @@ public class BookController {
     @GetMapping("editBook/{id}")
     public String editBook(@PathVariable("id") Long id, Model model) {
         model.addAttribute("editBook", bookRepository.findById(id));
+        model.addAttribute("categories", categoryRepository.findAll());
         return "editBook";
     }
 
     @PostMapping("/saveEditedBook")
-    public String saveEditedBook(Book book) {
+    public String saveEditedBook(Book book, Model model) {
         bookRepository.save(book);
         return "redirect:/bookList";
     }

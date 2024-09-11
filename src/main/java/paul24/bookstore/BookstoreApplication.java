@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 
 import paul24.bookstore.model.Book;
 import paul24.bookstore.model.BookRepository;
+import paul24.bookstore.model.Category;
+import paul24.bookstore.model.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -16,8 +18,13 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demoData(BookRepository bookRepository) {
+	public CommandLineRunner demoData(BookRepository bookRepository, CategoryRepository categoryRepository) {
 		return (args) -> {
+
+			categoryRepository.save(new Category("Non-fiction"));
+			categoryRepository.save(new Category("Sci-fi"));
+			categoryRepository.save(new Category("Romance"));
+
 
 			bookRepository.save(new Book("Taisteluni", "Hullu Miäs", 1933, "897A-F98AWF-986A89F", 30.99));
 			bookRepository.save(new Book("Roopen Elämä ja Teot", "Don Rosa", 1998, "597A-F423AWF-986A89F", 53.80));
