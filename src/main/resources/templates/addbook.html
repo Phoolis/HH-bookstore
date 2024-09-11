@@ -8,12 +8,14 @@
 <body>
     <h1>Add new book</h1>
     <form action="#" th:object="${book}" th:action="@{saveBook}" method="post">
-        <p>Title: <input type="text" th:field="*{title}"/></p>
+        <p>Title: <input type="text" th:field="*{title}"/>
+        <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div></p>
         <p>Author: <input type="text" th:field="*{author}"/></p>
         <p>Publication Year: <input type="text" th:field="*{publicationYear}"/></p>
         <p>ISBN: <input type="text" th:field="*{isbn}"/></p>
         <Label>Category:</Label>
             <select id="categories" th:field="*{category}">
+                <option value="" th:text="'Select category (optional)'"></option> <!-- Tyhjä valinta -->
                 <option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
             </select>
         <p><input type="submit" value="Save"/></p>

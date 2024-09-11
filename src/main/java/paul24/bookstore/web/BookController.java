@@ -3,17 +3,17 @@ package paul24.bookstore.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.validation.Valid;
 import paul24.bookstore.model.Book;
 import paul24.bookstore.model.BookRepository;
 import paul24.bookstore.model.CategoryRepository;
-
-
-
 
 @Controller
 public class BookController {
@@ -42,11 +42,16 @@ public class BookController {
     }
 
     @PostMapping("/saveBook")
-    public String saveBook(Book book, Model model) {
+    public String saveBook(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("editBook", book);
+            model.addAttribute("categories", categoryRepository.findAll());
+            return "addBook";
+        }
         bookRepository.save(book);
         return "redirect:/bookList";
     }
-    
+
     @GetMapping("delete/{id}")
     public String deleteBook(@PathVariable("id") Long id, Model model) {
         bookRepository.deleteById(id);
@@ -65,10 +70,5 @@ public class BookController {
         bookRepository.save(book);
         return "redirect:/bookList";
     }
-    
-    
-    
-    
-    
-    
+
 }
