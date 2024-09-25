@@ -22,6 +22,9 @@ public class AppUser {
     @Column(name = "password", nullable = false)
     private String passwordHash;
 
+    @Column(name = "email", nullable = true)
+    private String email;
+
     @Column(name = "role", nullable = false)
     private String role;
 
@@ -29,6 +32,13 @@ public class AppUser {
     }
 
     public AppUser(String passwordHash, String role, String username) {
+        this.passwordHash = passwordHash;
+        this.role = role;
+        this.username = username;
+    }
+
+    public AppUser(String email, String passwordHash, String role, String username) {
+        this.email = email;
         this.passwordHash = passwordHash;
         this.role = role;
         this.username = username;
@@ -64,6 +74,14 @@ public class AppUser {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
