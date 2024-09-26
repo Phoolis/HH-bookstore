@@ -1,6 +1,7 @@
 package paul24.bookstore.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,6 +36,7 @@ public class BookController {
     }
 
     @GetMapping("/addBook")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
         model.addAttribute("categories", categoryRepository.findAll());
@@ -42,6 +44,7 @@ public class BookController {
     }
 
     @PostMapping("/saveBook")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveBook(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("editBook", book);
@@ -53,12 +56,14 @@ public class BookController {
     }
 
     @GetMapping("delete/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteBook(@PathVariable("id") Long id, Model model) {
         bookRepository.deleteById(id);
         return "redirect:/bookList";
     }
 
     @GetMapping("editBook/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String editBook(@PathVariable("id") Long id, Model model) {
         model.addAttribute("editBook", bookRepository.findById(id));
         model.addAttribute("categories", categoryRepository.findAll());
@@ -66,6 +71,7 @@ public class BookController {
     }
 
     @PostMapping("/saveEditedBook")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveEditedBook(Book book, Model model) {
         bookRepository.save(book);
         return "redirect:/bookList";
