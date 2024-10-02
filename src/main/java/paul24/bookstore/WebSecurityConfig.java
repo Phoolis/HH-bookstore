@@ -21,7 +21,8 @@ public class WebSecurityConfig {
     private UserDetailServiceImpl userDetailService;
 
     private static final AntPathRequestMatcher[] WHITE_LIST_URLS = {
-        new AntPathRequestMatcher("/api/books**"),
+        new AntPathRequestMatcher("/api/**"),
+        new AntPathRequestMatcher("/book**"),
         new AntPathRequestMatcher("/h2-console/**")
     };
 
