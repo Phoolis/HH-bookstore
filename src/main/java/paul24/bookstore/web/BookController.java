@@ -32,7 +32,7 @@ public class BookController {
     @GetMapping("/bookList")
     public String showBooks(Model model) {
         model.addAttribute("books", bookRepository.findAll());
-        return "bookList";
+        return "booklist";
     }
 
     @GetMapping("/addBook")
@@ -40,7 +40,7 @@ public class BookController {
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
         model.addAttribute("categories", categoryRepository.findAll());
-        return "addBook";
+        return "addbook";
     }
 
     @PostMapping("/saveBook")
@@ -49,17 +49,17 @@ public class BookController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("editBook", book);
             model.addAttribute("categories", categoryRepository.findAll());
-            return "addBook";
+            return "addbook";
         }
         bookRepository.save(book);
-        return "redirect:/bookList";
+        return "redirect:/booklist";
     }
 
     @GetMapping("delete/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteBook(@PathVariable("id") Long id, Model model) {
         bookRepository.deleteById(id);
-        return "redirect:/bookList";
+        return "redirect:/booklist";
     }
 
     @GetMapping("editBook/{id}")
@@ -67,14 +67,14 @@ public class BookController {
     public String editBook(@PathVariable("id") Long id, Model model) {
         model.addAttribute("editBook", bookRepository.findById(id));
         model.addAttribute("categories", categoryRepository.findAll());
-        return "editBook";
+        return "editbook";
     }
 
     @PostMapping("/saveEditedBook")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String saveEditedBook(Book book, Model model) {
         bookRepository.save(book);
-        return "redirect:/bookList";
+        return "redirect:/booklist";
     }
 
 }
