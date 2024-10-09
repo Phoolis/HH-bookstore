@@ -1,23 +1,27 @@
 package paul24.bookstore.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
+@Table(name = "books")
 public class Book {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank(message = "Book's title cannot be empty.")
     private String title;
     private String author;
+    @Column(name = "publication_year")
     private int publicationYear;
     private String isbn;
     private double price;
@@ -25,7 +29,7 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "categoryid")
     private Category category;
-    
+
     public Book() {
     }
 

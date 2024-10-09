@@ -38,7 +38,7 @@ public class WebSecurityConfig {
                         -> headers.frameOptions(frameOptions -> frameOptions
                 .disable())) // for h2-console
                 .formLogin(formlogin -> formlogin
-                .defaultSuccessUrl("/bookList", true)
+                .defaultSuccessUrl("/booklist", true)
                 .permitAll())
                 .logout(logout -> logout.permitAll())
                 .csrf(csrf -> csrf.disable()); // not for production, just for development

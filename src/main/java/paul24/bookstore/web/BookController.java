@@ -29,7 +29,7 @@ public class BookController {
         return new String();
     }
 
-    @GetMapping("/bookList")
+    @GetMapping("/booklist")
     public String showBooks(Model model) {
         model.addAttribute("books", bookRepository.findAll());
         return "booklist";

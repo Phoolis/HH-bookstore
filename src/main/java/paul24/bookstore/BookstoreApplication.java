@@ -1,17 +1,17 @@
 package paul24.bookstore;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
+/* import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.boot.CommandLineRunner;
 import paul24.bookstore.model.AppUser;
 import paul24.bookstore.model.AppUserRepository;
 import paul24.bookstore.model.Book;
 import paul24.bookstore.model.BookRepository;
 import paul24.bookstore.model.Category;
-import paul24.bookstore.model.CategoryRepository;
+import paul24.bookstore.model.CategoryRepository; */
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -19,7 +19,7 @@ public class BookstoreApplication {
     public static void main(String[] args) {
         SpringApplication.run(BookstoreApplication.class, args);
     }
-
+    /* 
     @Bean
     public CommandLineRunner demoData(BookRepository bookRepository, CategoryRepository categoryRepository, AppUserRepository appUserRepository) {
         return (args) -> {
@@ -44,6 +44,6 @@ public class BookstoreApplication {
             appUserRepository.save(user1);
             appUserRepository.save(user2);
         };
-    }
+    } */
 
 }
